@@ -225,7 +225,7 @@ class Automate:
             self.out_iter += 1
 
     def track_mice(self, video):
-        """Tracking algorithm edited from tracktor, see citation"""
+        """Tracking algorithm edited from tracktor, see tracktor.py and citation"""
         # colours is a vector of BGR values which are used to identify individuals in the video
         # since we only have one individual, the program will only use the first element from this array
         # i.e. (0,0,255) - red number of elements in colours should be greater than n_inds
