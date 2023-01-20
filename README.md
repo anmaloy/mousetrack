@@ -14,17 +14,17 @@ Instructions
 ----
 
 To use mousetrack, you will need a Python installation and the following packages:
-	-cv2
-	-glob
-	-imageio
-	-matplotlib
-	-numpy
-	-os
-	-pandas
-	-scipy
-	-sklearn
-	-sys
-	-time
+  • cv2
+  • glob
+  • imageio
+  • matplotlib
+  • numpy
+  • os
+  • pandas
+  • scipy
+  • sklearn
+  • sys
+  • time
 Instructions for setting up a Python environment on Windows can be found [here](https://docs.python.org/3/using/windows.html)
 
 Once you have the necessary dependencies, download this repository to your desired location. Copy the videos you want to track and analyze into the videos/in directory and run mousetrack.py. Each video will be displayed in turn.
