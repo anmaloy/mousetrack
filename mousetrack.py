@@ -406,7 +406,7 @@ class Automate:
         results.to_csv('results\\results.csv', index=False)
 
         # Clears generated files are in //out or //processing
-        # self.clear_files()
+        self.clear_files()
 
 
 start_time = time.time()
