@@ -35,9 +35,9 @@ class Automate:
         return length
 
     @staticmethod
-    def select_start(file):
+    def select_start(video):
         """Returns the frame at which the video will start tracking"""
-        capture = cv2.VideoCapture(file)
+        capture = cv2.VideoCapture(video)
         if not capture.isOpened():
             print('Cannot open video')
             sys.exit()
@@ -187,7 +187,7 @@ class Automate:
                                           '2': bbox[count][2], '3': bbox[count][3], 'angle': angle, 'file': video})
 
                 self.df = pd.concat([self.df, concat_df], ignore_index=True)
-            count += 1
+                count += 1
         count = 0
         for i in range(len(self.df)):
             # Sets video from file location at index in df
@@ -218,7 +218,7 @@ class Automate:
                     frame = self.rotate_image(frame, self.df.iloc[count, 6])
                 # Crops video into the determined bounding box and writes each box to a new file
                 cropped_vid = frame[self.df.iloc[count, 3]: self.df.iloc[count, 3] + self.df.iloc[count, 5],
-                              self.df.iloc[count, 2]: self.df.iloc[count, 2] + self.df.iloc[count, 4]]
+                                    self.df.iloc[count, 2]: self.df.iloc[count, 2] + self.df.iloc[count, 4]]
                 out.write(cropped_vid)
                 ok, frame = capture.read()
             count += 1
@@ -296,7 +296,8 @@ class Automate:
                             maxy = loc_df['y'].max()
                             minx = loc_df['x'].min()
                             miny = loc_df['y'].min()
-                            concat_df = pd.DataFrame({'maxx': maxx, 'maxy': maxy, 'minx': minx, 'miny': miny})
+                            concat_df = pd.DataFrame({'maxx': maxx, 'maxy': maxy, 'minx': minx, 'miny': miny},
+                                                     index=[0])
                             pos_df = pd.concat([pos_df, concat_df], ignore_index=True)
                         except ValueError:
                             print('Tracking error, skipped frame')
@@ -398,14 +399,14 @@ class Automate:
             plt.clf()
 
             # Writes results to a dataframe
-            concat_df = pd.DataFrame({'video': vid_name, 'rears': rears, 'stretches': stretches})
+            concat_df = pd.DataFrame({'video': [vid_name], 'rears': [rears], 'stretches': [stretches]})
             results = pd.concat([results, concat_df], ignore_index=True)
 
         # Outputs the results of each analysis into a csv
         results.to_csv('results\\results.csv', index=False)
 
         # Clears generated files are in //out or //processing
-        self.clear_files()
+        # self.clear_files()
 
 
 start_time = time.time()
